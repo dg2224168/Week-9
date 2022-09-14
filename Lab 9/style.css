@@ -1,0 +1,16 @@
+h1 {
+    width: 100%;
+    text-align: center;
+    background-color: aquamarine;
+    height: 200px;
+    padding-top: 4em;
+}
+
+div {
+    width: 100%;
+    text-align: center;
+    background-color: beige;
+    height: 400px;
+    padding-top: 4em;
+}
+

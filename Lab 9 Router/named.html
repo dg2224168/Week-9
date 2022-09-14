@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Named Router</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+
+    <style>
+        .user {
+            display: block;
+            width: 100;
+            background-color: azure;
+            height: 100px;
+            text-align: center;
+        }
+        .userpost {
+            display: block;
+            width: 100;
+            background-color: aqua;
+            height: 200px;
+            text-align: center;
+            padding-top: 4em;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+
+        <p>
+            <!-- use router-link component for navigation. -->
+            <!-- specify the link by passing the `to` prop. -->
+            <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+           
+            <!-- <router-link to="/user">User</router-link> -->
+            <router-link :to="{name: 'user', params: { id: 2 }}">User</router-link>
+            <br>
+            <button @click="push">Click Me</button>
+            <button @click="pushuser">User Component Click</button>
+        
+          </p>
+
+        <router-view></router-view>
+    </div>
+
+    <script>
+
+        const User = {
+            template: '<div class="user">User {{$route.params.id}}<router-view></router-view></div>',
+            
+        }
+
+        const Home = {
+            template: '<div>Welcome to home</div>',
+        }
+
+        const UserPosts = { 
+            template: '<div class="userpost">User Posts {{users[$route.params.id].post}}</div>',
+            data() {
+                return {
+                    users: [
+                        {id: 0, name: 'Person 0', post: "This is person 0 post"},
+                        {id: 1, name: 'Person 1', post: "This is person 1 post"},
+                        {id: 2, name: 'Person 2', post: "This is person 2 post"},
+                        {id: 3, name: 'Person 3', post: "This is person 3 post"}
+
+                    ]
+                }
+            }
+        }
+
+        const router = new VueRouter({
+            routes: [
+                {
+                path: '/user/:id', 
+                name: 'user', //named route
+                component: User, 
+                children: [
+                    // { path: 'profile', component: UserProfile},
+                    { path: 'post', component: UserPosts},
+                ]
+                },
+                {
+                    path: '/home',
+                    component: Home,
+                }
+               
+
+            ]
+        })
+
+        new Vue({
+            el: "#app",
+            router: router,
+            methods: {
+                push(){
+                    router.push('home')
+                },
+                pushuser(){
+                    router.push({ name: 'user', params: { id: 1 } })
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

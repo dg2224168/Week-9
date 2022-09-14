@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lets Learn Router Today</title>
+<!--    STEP 1: -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+
+    <style>
+        h1 {
+            width: 100%;
+            text-align: center;
+            background-color: cadetblue;
+            height: 100px;
+            padding-top: 4em;
+        }
+        h4 {
+            width: 100%;
+            text-align: center;
+            background-color: blanchedalmond;
+            height: 200px;
+            padding-top: 4em;
+        }
+        p {
+            width: 100%;
+            text-align: center;
+            background-color: rosybrown;
+            height: 200px;
+            padding-top: 1em;
+        }
+
+        .divstyle {
+            width: 100%;
+            text-align: center;
+            background-color: rosybrown;
+            padding-top: 1em;
+        }
+
+        img {
+            width: 100px;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px; /* Should be removed. Only for demonstration */
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<div id="app">
+<!--    STEP 2: Have Router Link and Router View-->
+
+    <div class="divstyle">
+<!--        THis is for links are-->
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/contact">Contact</router-link>
+    </div>
+
+    <div style="padding-top: 2em">
+       Search: <input type="text" style="width: 80%">
+    </div>
+
+    <div> Results</div>
+<!--Place to show the content when link is clicked-->
+    <router-view></router-view>
+
+</div>
+
+<script>
+
+    const Component1 = {
+    template: `
+    <div>
+
+    <div class="column">
+     Welcome to my Portfolio Website!</h1>
+    </div>
+    <div cl>
+        <img src="https://www.deakin.edu.au/__data/assets/image/0008/2354507/31089_950x4751.jpeg">
+
+    </div>
+
+    </div>
+
+
+
+</div>
+
+    <h4>This website is about my portfolio!</h4>
+
+    </div>
+    `
+    }
+
+    const Component2 = {
+    template: `<div>
+        <h1>This page is about me!</h1>
+        <p>This is going to be about me!</p>
+    </div>`
+    }
+
+
+    const Component3 = {template: `<div>
+    <h1>Please contact me!</h1>
+    <div>
+    <label>Name:</label>
+    <input type="text">
+    <label>Email:</label>
+    <input type="text">
+    <input type="button" value="Submit">
+
+
+    </div>
+    </div>`}
+
+    //STEP 4: Create Routes
+    const routes = [
+        {path: '/', component: Component1},
+        {path: '/about', component: Component2},
+        {path: '/contact', component: Component3},
+    ]
+
+    //STEP 5: Create Router Instance
+    const router = new VueRouter({
+        routes: routes
+    })
+
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                message: "Hello World!"
+            }
+        },
+        //STEP 6: Register Router
+        router: router
+    })
+</script>
+
+</body>
+</html>

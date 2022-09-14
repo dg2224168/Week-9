@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    <style>
+        p {
+            width: 100%;
+            text-align: center;
+            background-color: antiquewhite;
+            padding: 1em;
+        }
+        h1 {
+            width: 100%;
+            text-align: center;
+            background-color: beige;
+            height: 200px;
+            padding-top: 4em;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+  <p>
+    <!-- use router-link component for navigation. -->
+    <!-- specify the link by passing the `to` prop. -->
+    <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+    <router-link to="/">Home</router-link>    
+    <router-link to="/about">About</router-link>
+    <router-link to="/contact">Contact</router-link>
+  </p>
+  <!-- route outlet -->
+  <!-- component matched by the route will render here -->
+  <router-view></router-view>
+     
+    </div>
+
+    <script>
+
+        // Route Components
+        const Home = {template: '<div><h1>Welcome to Home Page</h1></div>'};
+        const About = { template: '<h1>Hi, I am Vue Web Developer!</h1>' };
+        const Contact = { template: '<h1>Please contact me at: <br> abc@gmail.com</h1>' };
+
+        // Routes to map to components
+        const routes =  [ 
+            { path: '/',component:Home},
+            { path:'/about', component: About},
+            { path:'/contact', component: Contact},
+        ]
+
+        // Router instance 
+        // Passing routes options
+        const router = new VueRouter({ routes: routes })
+
+        new Vue({
+            el: "#app",
+            data: {
+                message: "Hello router example"
+            },
+    
+            router:router
+        })
+    </script>
+    
+</body>
+</html>

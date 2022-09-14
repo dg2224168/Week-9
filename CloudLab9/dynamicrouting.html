@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Routing</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+</head>
+<body>
+
+<div id="app">
+    
+    <router-link to="/user">User</router-link>
+    <router-view></router-view>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Hint: Try with adding /1 on your url like:
+        <br>
+        http://127.0.0.1:5500/CloudLab9/dynamicrouting.html#/user/1
+    </h1>
+</div>
+
+<script>
+
+    const User = {
+        template: `<div>
+        <div>User Component!
+        </div>
+        <p>{{users[$route.params.id].name}}</p>
+        </div>`,
+        data() {
+            return {
+                users: [
+                    {id:0, name: "Person 0"},
+                    {id:1, name: "Person 1"},
+                    {id:2, name: "Person 2"},
+                    {id:3, name: "Person 4"},
+                ]
+            }
+        }
+    }
+
+    const router = new VueRouter({
+        routes: [
+            {path: '/user/:id', component: User}
+
+        ]
+    })
+
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                message: "Hello Dynamic Routing!"
+            }
+        },
+        router: router
+    })
+</script>
+
+</body>
+</html>

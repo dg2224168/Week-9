@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        <router-link to="/user">User</router-link>
+        <router-link to="/search">Search</router-link>
+        <router-link to="/bar">Bar</router-link>
+        <router-view id=1 author="John"></router-view>
+    </div>
+
+    <script>
+        const SearchUser = {template: '<div> Query Value: <br> {{$route.query.name}}</div>'}
+        const User = {props: ['id'], template: '<div>User <br>{{$route.params.id}}{{id}}</div>'}
+        const Bar = {props: ['author'], template: '<div>Hi, {{author}}</div>'}
+
+        const routes = [
+            { path: '/user', component: User},
+            {
+            path: '/search',
+            component: SearchUser,
+            props: route => ({ query: route.query.name })
+            // The URL /search?q=vue would pass {query: 'vue'} as props to the SearchUser component.
+            },
+            {
+                path: '/bar',
+                component: Bar,
+                props: {
+                    author: "David"
+                }
+            }
+        ]
+        const router = new VueRouter({
+            routes: routes
+        
+        })
+        new Vue({
+            el: "#app",
+            router
+
+        })
+    </script>
+    
+</body>
+</html>

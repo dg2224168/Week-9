@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Router Example</title>
+   <!-- First STEP ADD CDN Links -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+       
+         <!-- STEP 7 Design where we want our router to work: -->
+     Search:  <input type="text" v-model="message">
+         <div>
+            <router-link to="/">About</router-link>
+            <router-link to="/component2">My Projects</router-link>
+            <router-link to="/component3">Contact Me</router-link>
+            <a href="about.html">Google.com</a>
+         </div>
+ 
+         <router-view></router-view>
+
+         <div v-if="john">
+            This is only shown when the search matches with the search !
+         </div>
+
+
+    </div>
+
+
+   <script>
+ 
+    // STEP 3: Route components 
+    const Component1 = {template: `<div><h1>Hello Component 1</h1>
+        <p>This is detail</p><div>`}
+    const Component2 = {template: `<h1>Hello Component 2</h1>`}
+    const Component3 = {template: `<h1>Hello Component 3</h1>`}
+    const Component4 = {template: `<h1>Hello Component 4</h1>`}
+
+    // STEP 4:  Routes to map to compnents 
+    const routes = [
+        {path: '/', component: Component1},
+        {path: '/component2', component: Component2},
+        {path: '/component3', component: Component3},
+
+    ]
+
+
+    
+
+    // STEP 5: Create Vue Router Instance
+
+    const router = new VueRouter({
+        routes: routes
+    })
+
+
+    // STEP 2: Create VUE Instance
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                message: "Hello",
+                john: false,
+            }
+        },
+        computed: {
+            isJohnSearch() {
+                this.john = true
+            }
+
+        },
+        // STEP 6: Register router
+        router: router
+
+
+    })
+   </script>
+    
+</body>
+</html>

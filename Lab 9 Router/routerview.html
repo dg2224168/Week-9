@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router View</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Named Views</h1>
+        <ul>
+          <li>
+            <router-link to="/">Components 1 to 3</router-link>
+          </li>
+          <li>
+            <router-link to="/other">Components 4 to 6</router-link>
+          </li>
+        </ul>
+        <router-view></router-view>
+        <router-view name="a"></router-view>
+        <router-view name="b"></router-view>
+      </div>
+      
+    
+
+<script>
+const Component1 = { template: '<div>This is Component 1</div>' }
+const Component2 = { template: '<div>This is Component 2</div>' }
+const Component3 = { template: '<div>This is Component 3</div>' }
+const Component4 = { template: '<div>This is Component 4</div>' }
+const Component5 = { template: '<div>This is Component 5  </div>' }
+const Component6 = { template: '<div>This is Component 6</div>' }
+
+
+const router = new VueRouter({
+  routes: [
+    { path: '/',
+      // a single route can define multiple named components
+      // which will be rendered into <router-view>s with corresponding names.
+      components: {
+        default: Component1,
+        a: Component2,
+        b: Component3
+      }
+    },
+    {
+      path: '/other',
+      components: {
+        default: Component4,
+        a: Component5,
+        b: Component6
+      }
+    }
+  ]
+})
+
+new Vue({
+	router,
+  el: '#app'
+})
+
+</script>
+</body>
+</html>
