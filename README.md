@@ -1,7 +1,7 @@
 # Week-9
 
 
-Simple run the html files normally.
+Run the html files normally.
 
 Main examples are in Folder: Lab 9 Router!
 
